@@ -7,7 +7,7 @@ import os
 os.getcwd() # 기본 디렉토리 확인
 os.chdir("C:/Users/mjh/Documents/ZeroYieldCurve")
 
-df = pd.read_excel("fit1.xlsx", sheetname = 0, header=0, index_col=0)
+df = pd.read_excel("interest_hw_data.xlsx", sheetname = 0, header=0, index_col=0)
 
 r_nelson = lambda x,m: x[0]+(x[1]*(1-(np.exp(-m/x[3])))*(x[3]/m))+(x[2]*(((1-(np.exp(-m/x[3]))*(x[3]/m))-np.exp(-m/x[3]))))
 d_nelson = lambda x,m: np.exp(-r_nelson(x,m)*m/100)
@@ -41,7 +41,7 @@ def nelson(x):
         obj = obj+obj_cou
     return obj
 
-x0 = [7.69,-4.13,-2.44,2.02]
+x0 = [0.1,0.1,0.1,0.1]
 res = minimize(nelson,x0,method='Nelder-Mead', tol=1e-10)
 a=res.x
 
@@ -72,7 +72,7 @@ def svensson(x):
         obj = obj+obj_cou
     return obj
 
-x0 = [5.82,-2.55,-0.87,0.45,3.90,0.44]
+x0 = [1,1,1,1,1,1]
 res = minimize(svensson,x0,method='Nelder-Mead', tol=1e-10)
 b=res.x
 
